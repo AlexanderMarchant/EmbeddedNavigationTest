@@ -7,12 +7,22 @@
 
 import SwiftUI
 
+enum FileExtension: String, CaseIterable {
+    case txt = "txt"
+    case pdf = "pdf"
+    case docx = "docx"
+    case md = "md"
+    case png = "png"
+    case jpg = "jpg"
+}
+
 struct NestedView_SwiftUI: View {
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @State var nest = 0
     @State private var isActive = false
+    var fileExtension: FileExtension? = nil
     
     var body: some View {
         
@@ -20,7 +30,7 @@ struct NestedView_SwiftUI: View {
             
             VStack(spacing: 25) {
 
-                NavigationLink(destination: NestedView_SwiftUI(nest: self.nest + 1).navigationBarHidden(true), isActive: $isActive) {
+                NavigationLink(destination: getDestination(from: self.fileExtension), isActive: $isActive) {
                     
                     Button {
                         
@@ -54,6 +64,20 @@ struct NestedView_SwiftUI: View {
             
             
         }
+    }
+    
+    func getDestination(from fileExtension: FileExtension? = nil) -> AnyView {
+        
+        if let ext = fileExtension {
+            return AnyView(FileView(fileType: ext.rawValue).navigationBarHidden(false))
+        } else {
+            if Int.random(in: 0...30) >= 28 {
+                return AnyView(NestedView_SwiftUI(nest: self.nest + 1, fileExtension: .jpg).navigationBarHidden(true))
+            } else {
+                return AnyView(NestedView_SwiftUI(nest: self.nest + 1, fileExtension: nil).navigationBarHidden(true))
+            }
+        }
+        
     }
     
 }

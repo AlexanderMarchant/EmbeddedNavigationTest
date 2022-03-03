@@ -14,6 +14,7 @@
 		D49E131927CFD9FC00480AD9 /* NestedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E131827CFD9FC00480AD9 /* NestedView.swift */; };
 		D49E135727CFF4CD00480AD9 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E135627CFF4CD00480AD9 /* FilesViewController.swift */; };
 		D49E135B27D0D1C700480AD9 /* NestedView_SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E135A27D0D1C700480AD9 /* NestedView_SwiftUI.swift */; };
+		D49E135D27D0D5EE00480AD9 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E135C27D0D5ED00480AD9 /* FileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		D49E131827CFD9FC00480AD9 /* NestedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedView.swift; sourceTree = "<group>"; };
 		D49E135627CFF4CD00480AD9 /* FilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
 		D49E135A27D0D1C700480AD9 /* NestedView_SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedView_SwiftUI.swift; sourceTree = "<group>"; };
+		D49E135C27D0D5ED00480AD9 /* FileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				D49E135A27D0D1C700480AD9 /* NestedView_SwiftUI.swift */,
+				D49E135C27D0D5ED00480AD9 /* FileView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D49E135D27D0D5EE00480AD9 /* FileView.swift in Sources */,
 				D49E135B27D0D1C700480AD9 /* NestedView_SwiftUI.swift in Sources */,
 				D49E130D27CFD9D200480AD9 /* ContentView.swift in Sources */,
 				D49E131927CFD9FC00480AD9 /* NestedView.swift in Sources */,

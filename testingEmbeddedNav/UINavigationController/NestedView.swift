@@ -49,4 +49,5 @@ struct NestedView: View {
             .navigationBarHidden(true)
         }
     }
+    
 }
