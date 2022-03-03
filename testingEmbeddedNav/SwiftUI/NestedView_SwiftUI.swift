@@ -31,35 +31,45 @@ struct NestedView_SwiftUI: View {
         
         NavigationView {
             
-            VStack(spacing: 25) {
+            HStack {
+                
+                Spacer()
+                
+                VStack(spacing: 25) {
 
-                NavigationLink(destination: getDestination(from: self.fileExtension), isActive: $isActive) {
-                    
-                    Button {
+                    NavigationLink(destination: getDestination(from: self.fileExtension), isActive: $isActive) {
                         
-                        // run your code
-                        
-                        // then set
-                        isActive = true
+                        Button {
+                            
+                            // run your code
+                            
+                            // then set
+                            isActive = true
 
-                    } label: {
-                        VStack(spacing: 15) {
-                            Text("Nest: \(self.nest)")
-                            Text("Go one nest deeper")
+                        } label: {
+                            VStack(spacing: 15) {
+                                Text("Nest: \(self.nest)")
+                                Text("Go one nest deeper")
+                            }
                         }
+                        .background(Color.white)
                     }
-                    .background(Color.white)
+                    
+                        Button {
+                            
+                            self.isActive = false
+                            self.mode.wrappedValue.dismiss()
+
+                        } label: {
+                            Text("Go back to parent nest")
+                        }
+                        .background(Color.white)
+                    
+                    Spacer()
+                    
                 }
                 
-                    Button {
-                        
-                        self.isActive = false
-                        self.mode.wrappedValue.dismiss()
-
-                    } label: {
-                        Text("Go back to parent nest")
-                    }
-                    .background(Color.white)
+                Spacer()
                 
             }
             .padding()
@@ -89,7 +99,7 @@ struct NestedView_SwiftUI: View {
             
         } else {
             
-            if Int.random(in: 0...30) >= 28 {
+            if self.nest == 2 {
                 return AnyView(
                     NestedView_SwiftUI(
                         nest: self.nest + 1,

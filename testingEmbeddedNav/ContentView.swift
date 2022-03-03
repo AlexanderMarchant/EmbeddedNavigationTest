@@ -10,11 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     @State var path = ""
+    @State private var currentLocation = ""
+    @State private var currentPath = ""
     
     var body: some View {
         
         VStack {
-            VStack {
+            VStack(spacing: 10) {
                 HStack {
                     Image(systemName: "clock")
                     Spacer()
@@ -23,13 +25,42 @@ struct ContentView: View {
                     Spacer()
                     Image(systemName: "clock")
                 }
-                Text(self.path)
+                if !currentPath.isEmpty {
+                    HStack {
+                        Image(systemName: "house")
+                            .frame(width: 12, height: 12)
+                        Text(self.currentPath)
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                }
+                HStack {
+                    Text(self.currentLocation)
+                        .font(.headline)
+                    Spacer()
+                }
             }
+            .background(.blue)
             
             NestedView_SwiftUI(currentPath: self.$path)
+            
 //            NestedView()
             
         }
+        .padding(.horizontal, 25)
+        .onChange(of: self.path, perform: { newValue in
+            
+            let split = newValue.split(separator: ">")
+            
+            var mutableSplit = split
+            mutableSplit.removeLast()
+            
+            let mutablePath = mutableSplit.map({ String($0) }).joined(separator: " > ")
+            
+            self.currentLocation = String(split.last ?? "")
+            self.currentPath = mutablePath
+            
+        })
     }
 }
 
