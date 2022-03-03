@@ -12,8 +12,8 @@ struct ContentView: View {
     @ObservedObject var appState = AppState()
     
     @State var path = ""
-    @State private var currentLocation = ""
-    @State private var currentPath = ""
+    @State private var currentLocation = "Home"
+    @State private var pathComponents = [String]()
     
     var body: some View {
         
@@ -27,15 +27,23 @@ struct ContentView: View {
                     Spacer()
                     Image(systemName: "clock")
                 }
-                if !currentPath.isEmpty {
-                    HStack {
+                if !pathComponents.isEmpty {
+                    HStack(spacing: 5) {
                         Image(systemName: "house")
-                            .frame(width: 12, height: 12)
                             .onTapGesture {
                                 appState.rootViewId = UUID()
                             }
-                        Text(self.currentPath)
-                            .font(.subheadline)
+                        
+                        ForEach(self.pathComponents, id: \.self) { component in
+                            Text(component)
+                                .font(.subheadline)
+                                .underline()
+                                .foregroundColor(.yellow)
+                            
+                            Text(">")
+                                .font(.subheadline)
+                        }
+                        
                         Spacer()
                     }
                 }
@@ -47,9 +55,7 @@ struct ContentView: View {
             }
             .background(.blue)
             
-            NestedView_SwiftUI(currentPath: self.$path)
-            
-//            NestedView()
+            HomeView(path: self.$path)
             
         }
         .environmentObject(self.appState)
@@ -63,13 +69,13 @@ struct ContentView: View {
                 var mutableSplit = split
                 mutableSplit.removeLast()
                 
-                let mutablePath = mutableSplit.map({ String($0) }).joined(separator: " > ")
+                let mutablePath = mutableSplit.map({ String($0) })
                 
                 self.currentLocation = String(split.last ?? "")
-                self.currentPath = mutablePath
+                self.pathComponents = mutablePath
             } else {
                 self.currentLocation = "Home"
-                self.currentPath = ""
+                self.pathComponents = [String]()
             }
             
         })
