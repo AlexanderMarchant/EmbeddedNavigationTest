@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @ObservedObject var appState = AppState()
+    
     @State var path = ""
     @State private var currentLocation = ""
     @State private var currentPath = ""
@@ -29,6 +31,9 @@ struct ContentView: View {
                     HStack {
                         Image(systemName: "house")
                             .frame(width: 12, height: 12)
+                            .onTapGesture {
+                                appState.rootViewId = UUID()
+                            }
                         Text(self.currentPath)
                             .font(.subheadline)
                         Spacer()
@@ -47,18 +52,25 @@ struct ContentView: View {
 //            NestedView()
             
         }
+        .environmentObject(self.appState)
+        .id(appState.rootViewId) 
         .padding(.horizontal, 25)
         .onChange(of: self.path, perform: { newValue in
             
-            let split = newValue.split(separator: ">")
-            
-            var mutableSplit = split
-            mutableSplit.removeLast()
-            
-            let mutablePath = mutableSplit.map({ String($0) }).joined(separator: " > ")
-            
-            self.currentLocation = String(split.last ?? "")
-            self.currentPath = mutablePath
+            if !newValue.isEmpty {
+                let split = newValue.split(separator: ">")
+                
+                var mutableSplit = split
+                mutableSplit.removeLast()
+                
+                let mutablePath = mutableSplit.map({ String($0) }).joined(separator: " > ")
+                
+                self.currentLocation = String(split.last ?? "")
+                self.currentPath = mutablePath
+            } else {
+                self.currentLocation = "Home"
+                self.currentPath = ""
+            }
             
         })
     }

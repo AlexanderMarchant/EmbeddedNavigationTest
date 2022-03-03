@@ -15,6 +15,7 @@
 		D49E135727CFF4CD00480AD9 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E135627CFF4CD00480AD9 /* FilesViewController.swift */; };
 		D49E135B27D0D1C700480AD9 /* NestedView_SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E135A27D0D1C700480AD9 /* NestedView_SwiftUI.swift */; };
 		D49E135D27D0D5EE00480AD9 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E135C27D0D5ED00480AD9 /* FileView.swift */; };
+		D49E136027D10D7500480AD9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E135F27D10D7500480AD9 /* AppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		D49E135627CFF4CD00480AD9 /* FilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
 		D49E135A27D0D1C700480AD9 /* NestedView_SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedView_SwiftUI.swift; sourceTree = "<group>"; };
 		D49E135C27D0D5ED00480AD9 /* FileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
+		D49E135F27D10D7500480AD9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		D49E130927CFD9D200480AD9 /* testingEmbeddedNav */ = {
 			isa = PBXGroup;
 			children = (
+				D49E135E27D10D6200480AD9 /* Utility */,
 				D49E135927D0D1AF00480AD9 /* SwiftUI */,
 				D49E135827D0D19D00480AD9 /* UINavigationController */,
 				D49E130A27CFD9D200480AD9 /* testingEmbeddedNavApp.swift */,
@@ -93,6 +96,14 @@
 				D49E135C27D0D5ED00480AD9 /* FileView.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		D49E135E27D10D6200480AD9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D49E135F27D10D7500480AD9 /* AppState.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			files = (
 				D49E135D27D0D5EE00480AD9 /* FileView.swift in Sources */,
 				D49E135B27D0D1C700480AD9 /* NestedView_SwiftUI.swift in Sources */,
+				D49E136027D10D7500480AD9 /* AppState.swift in Sources */,
 				D49E130D27CFD9D200480AD9 /* ContentView.swift in Sources */,
 				D49E131927CFD9FC00480AD9 /* NestedView.swift in Sources */,
 				D49E135727CFF4CD00480AD9 /* FilesViewController.swift in Sources */,

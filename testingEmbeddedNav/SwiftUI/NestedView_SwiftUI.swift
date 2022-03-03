@@ -18,6 +18,7 @@ enum FileExtension: String, CaseIterable {
 
 struct NestedView_SwiftUI: View {
     
+    @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @State var nest = 0

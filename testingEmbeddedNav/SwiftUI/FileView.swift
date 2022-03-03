@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FileView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @Binding var currentPath: String
     var fileType: String
     
