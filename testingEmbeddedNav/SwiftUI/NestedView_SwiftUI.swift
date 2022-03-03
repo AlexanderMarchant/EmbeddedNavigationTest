@@ -22,6 +22,9 @@ struct NestedView_SwiftUI: View {
     
     @State var nest = 0
     @State private var isActive = false
+    
+    @Binding var currentPath: String
+    
     var fileExtension: FileExtension? = nil
     
     var body: some View {
@@ -64,17 +67,46 @@ struct NestedView_SwiftUI: View {
             
             
         }
+        .onAppear(perform: {
+            self.currentPath = "\(self.currentPath) > \(self.nest)"
+        })
+        .onDisappear(perform: {
+            self.currentPath = self.currentPath.replacingOccurrences(of: " > \(self.nest)", with: "")
+        })
     }
     
     func getDestination(from fileExtension: FileExtension? = nil) -> AnyView {
         
         if let ext = fileExtension {
-            return AnyView(FileView(fileType: ext.rawValue).navigationBarHidden(false))
+            
+            return AnyView(
+                FileView(
+                    currentPath: self.$currentPath,
+                    fileType: ext.rawValue
+                )
+                .navigationBarHidden(false)
+            )
+            
         } else {
+            
             if Int.random(in: 0...30) >= 28 {
-                return AnyView(NestedView_SwiftUI(nest: self.nest + 1, fileExtension: .jpg).navigationBarHidden(true))
+                return AnyView(
+                    NestedView_SwiftUI(
+                        nest: self.nest + 1,
+                        currentPath: self.$currentPath,
+                        fileExtension: .jpg
+                    )
+                    .navigationBarHidden(true)
+                )
             } else {
-                return AnyView(NestedView_SwiftUI(nest: self.nest + 1, fileExtension: nil).navigationBarHidden(true))
+                return AnyView(
+                    NestedView_SwiftUI(
+                        nest: self.nest + 1,
+                        currentPath: self.$currentPath,
+                        fileExtension: nil
+                    )
+                    .navigationBarHidden(true)
+                )
             }
         }
         

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var path = ""
+    
     var body: some View {
         
         VStack {
@@ -21,10 +23,10 @@ struct ContentView: View {
                     Spacer()
                     Image(systemName: "clock")
                 }
-                Text("Second Row")
+                Text(self.path)
             }
             
-            NestedView_SwiftUI()
+            NestedView_SwiftUI(currentPath: self.$path)
 //            NestedView()
             
         }
