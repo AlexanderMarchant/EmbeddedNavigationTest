@@ -8,9 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        VStack {
+            VStack {
+                HStack {
+                    Image(systemName: "clock")
+                    Spacer()
+                    Text("This is my header")
+                        .background(Color.red)
+                    Spacer()
+                    Image(systemName: "clock")
+                }
+                Text("Second Row")
+            }
+            
+            NestedView_SwiftUI()
+//            NestedView()
+            
+        }
     }
 }
 
