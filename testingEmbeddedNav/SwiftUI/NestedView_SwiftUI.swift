@@ -25,6 +25,7 @@ struct NestedView_SwiftUI: View {
     @State private var isActive = false
     
     @Binding var currentPath: String
+    @Binding var didReachFile: Bool
     
     var fileExtension: FileExtension? = nil
     
@@ -78,6 +79,17 @@ struct NestedView_SwiftUI: View {
             
             
         }
+        .onChange(of: appState.pathClicked, perform: { value in
+            
+            guard let newValue = value else {
+                      return
+                  }
+            
+            if self.nest == newValue {
+                self.isActive = false
+            }
+            
+        })
         .onAppear(perform: {
             self.currentPath = "\(self.currentPath) > \(self.nest)"
         })
@@ -93,6 +105,7 @@ struct NestedView_SwiftUI: View {
             return AnyView(
                 FileView(
                     currentPath: self.$currentPath,
+                    didReachFile: self.$didReachFile,
                     fileType: ext.rawValue
                 )
                 .navigationBarHidden(false)
@@ -105,6 +118,7 @@ struct NestedView_SwiftUI: View {
                     NestedView_SwiftUI(
                         nest: self.nest + 1,
                         currentPath: self.$currentPath,
+                        didReachFile: self.$didReachFile,
                         fileExtension: .jpg
                     )
                     .navigationBarHidden(true)
@@ -114,6 +128,7 @@ struct NestedView_SwiftUI: View {
                     NestedView_SwiftUI(
                         nest: self.nest + 1,
                         currentPath: self.$currentPath,
+                        didReachFile: self.$didReachFile,
                         fileExtension: nil
                     )
                     .navigationBarHidden(true)

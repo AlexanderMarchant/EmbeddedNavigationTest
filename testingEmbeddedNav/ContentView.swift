@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var currentLocation = "Home"
     @State private var pathComponents = [String]()
     
+    @State var didReachFile = false
+    
     var body: some View {
         
         VStack {
@@ -39,6 +41,10 @@ struct ContentView: View {
                                 .font(.subheadline)
                                 .underline()
                                 .foregroundColor(.yellow)
+                                .onTapGesture {
+                                    let clicked = Int(component.replacingOccurrences(of: " ", with: ""))
+                                    appState.pathClicked = clicked
+                                }
                             
                             Text(">")
                                 .font(.subheadline)
@@ -47,15 +53,17 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                HStack {
-                    Text(self.currentLocation)
-                        .font(.headline)
-                    Spacer()
+                if !self.didReachFile {
+                    HStack {
+                        Text(self.currentLocation)
+                            .font(.headline)
+                        Spacer()
+                    }
                 }
             }
             .background(.blue)
             
-            HomeView(path: self.$path)
+            HomeView(path: self.$path, didReachFile: self.$didReachFile)
             
         }
         .environmentObject(self.appState)

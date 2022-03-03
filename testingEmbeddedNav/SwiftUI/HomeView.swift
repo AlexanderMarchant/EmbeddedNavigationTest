@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @Binding var path: String
+    @Binding var didReachFile: Bool
     
     @State private var showHome = true
     
@@ -32,7 +33,10 @@ struct HomeView: View {
                 
             }
         } else {
-            NestedView_SwiftUI(currentPath: self.$path)
+            NestedView_SwiftUI(
+                currentPath: self.$path,
+                didReachFile: self.$didReachFile
+            )
         }
         
         
