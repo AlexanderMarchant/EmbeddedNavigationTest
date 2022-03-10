@@ -15,6 +15,7 @@ struct HomeView: View {
     @Binding var pathComponents: [String]
     @Binding var didReachFile: Bool
     
+    @State private var gif: Gif? = nil
     @State private var nest = 0
     @State private var showHome = true
     
@@ -41,17 +42,22 @@ struct HomeView: View {
                 }
             } else {
                 NestedView_SwiftUI(
-                    gif: self.homeViewModel.gifs.first,
+                    gif: self.$gif,
                     pathComponents: self.$pathComponents,
+                    nest: self.$nest,
                     didReachFile: self.$didReachFile
                 )
-                .onReceive(Just(self.nest), perform: { value in
-                    
-                })
                 
     //            NestedView()
             }
         }
+        .onChange(of: self.nest, perform: { newValue in
+            homeViewModel.loadNextGifSet(onLoad: { gif in
+                DispatchQueue.main.async {
+                    self.gif = gif
+                }
+            })
+        })
         .alert(isPresented: $showingErrorAlert) {
             return Alert(
                 title: Text("Loading Failed"),

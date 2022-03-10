@@ -58,7 +58,7 @@ public class HomeViewModel: ObservableObject {
         }
     }
     
-    func loadNextGifSet() {
+    func loadNextGifSet(onLoad: @escaping ((Gif?) -> Void)) {
         
         resetAlert()
         
@@ -70,7 +70,7 @@ public class HomeViewModel: ObservableObject {
         case .bySearchTerm:
             self.getGifsBySearchTerm(userSearch: currentSearchTerm!)
         case .trending:
-            self.getTrendingGifs()
+            self.getTrendingGifs(onLoad: onLoad)
         }
     }
     
@@ -122,13 +122,13 @@ public class HomeViewModel: ObservableObject {
         
     }
     
-    private func getTrendingGifs() {
+    private func getTrendingGifs(onLoad: ((Gif) -> Void)? = nil) {
         
         self.currentSearch = .trending
         
         isLoading(true)
         
-        self.giphyService.getTrendingGifs(limit: 15) { [weak self] (gifs, error) in
+        self.giphyService.getTrendingGifs(limit: 1) { [weak self] (gifs, error) in
             
             self?.isLoading(false)
             
@@ -146,6 +146,7 @@ public class HomeViewModel: ObservableObject {
                 
                 DispatchQueue.main.async {
                     self?.gifs.append(contentsOf: gifs)
+                    onLoad?(gifs.first!)
                 }
                 
             } else {

@@ -21,12 +21,11 @@ struct NestedView_SwiftUI: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    var gif: Gif?
-    
-    @State var nest = 0
     @State private var isActive = false
     
+    @Binding var gif: Gif?
     @Binding var pathComponents: [String]
+    @Binding var nest: Int
     @Binding var didReachFile: Bool
     
     var fileExtension: FileExtension? = nil
@@ -43,15 +42,9 @@ struct NestedView_SwiftUI: View {
                     
                     GiphyView(giphyRowViewModel: .init(gif: self.gif))
 
-                    NavigationLink(destination: getDestination(from: self.fileExtension), isActive: $isActive) {
-                        
                         Button {
-                            
-                            // run your code
-                            
-                            // then set
-                            isActive = true
-
+                            self.nest += 1
+                            self.pathComponents.append("\(self.nest)")
                         } label: {
                             VStack(spacing: 15) {
                                 Text("Nest: \(self.nest)")
@@ -59,12 +52,12 @@ struct NestedView_SwiftUI: View {
                             }
                         }
                         .background(Color.white)
-                    }
                     
                         Button {
                             
-                            self.isActive = false
-                            self.mode.wrappedValue.dismiss()
+                            self.pathComponents.removeAll()
+                            self.nest = 0
+                            self.pathComponents.append("\(self.nest)")
 
                         } label: {
                             Text("Go back to parent nest")
@@ -94,52 +87,52 @@ struct NestedView_SwiftUI: View {
             }
             
         })
-        .onAppear(perform: {
-            self.pathComponents.append("\(self.nest)")
-        })
-        .onDisappear(perform: {
-            self.pathComponents.removeLast()
-        })
+//        .onAppear(perform: {
+//            self.pathComponents.append("\(self.nest)")
+//        })
+//        .onDisappear(perform: {
+//            self.pathComponents.removeLast()
+//        })
     }
     
-    func getDestination(from fileExtension: FileExtension? = nil) -> AnyView {
-        
-        if let ext = fileExtension {
-            
-            return AnyView(
-                FileView(
-                    pathComponents: self.$pathComponents,
-                    didReachFile: self.$didReachFile,
-                    fileType: ext.rawValue
-                )
-                .navigationBarHidden(false)
-            )
-            
-        } else {
-            
-            if self.nest == 2 {
-                return AnyView(
-                    NestedView_SwiftUI(
-                        nest: self.nest + 1,
-                        pathComponents: self.$pathComponents,
-                        didReachFile: self.$didReachFile,
-                        fileExtension: .jpg
-                    )
-                    .navigationBarHidden(true)
-                )
-            } else {
-                return AnyView(
-                    NestedView_SwiftUI(
-                        nest: self.nest + 1,
-                        pathComponents: self.$pathComponents,
-                        didReachFile: self.$didReachFile,
-                        fileExtension: nil
-                    )
-                    .navigationBarHidden(true)
-                )
-            }
-        }
-        
-    }
+//    func getDestination(from fileExtension: FileExtension? = nil) -> AnyView {
+//
+//        if let ext = fileExtension {
+//
+//            return AnyView(
+//                FileView(
+//                    pathComponents: self.$pathComponents,
+//                    didReachFile: self.$didReachFile,
+//                    fileType: ext.rawValue
+//                )
+//                .navigationBarHidden(false)
+//            )
+//
+//        } else {
+//
+//            if self.nest == 2 {
+//                return AnyView(
+//                    NestedView_SwiftUI(
+//                        nest: self.nest + 1,
+//                        pathComponents: self.$pathComponents,
+//                        didReachFile: self.$didReachFile,
+//                        fileExtension: .jpg
+//                    )
+//                    .navigationBarHidden(true)
+//                )
+//            } else {
+//                return AnyView(
+//                    NestedView_SwiftUI(
+//                        nest: self.nest + 1,
+//                        pathComponents: self.$pathComponents,
+//                        didReachFile: self.$didReachFile,
+//                        fileExtension: nil
+//                    )
+//                    .navigationBarHidden(true)
+//                )
+//            }
+//        }
+//
+//    }
     
 }
