@@ -11,7 +11,7 @@ struct FileView: View {
     
     @EnvironmentObject var appState: AppState
     
-    @Binding var currentPath: String
+    @Binding var pathComponents: [String]
     @Binding var didReachFile: Bool
     
     var fileType: String
@@ -24,11 +24,11 @@ struct FileView: View {
                 .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear(perform: {
-            self.currentPath = "\(self.currentPath) > \(fileType)"
+            self.pathComponents.append("\(self.fileType)")
             self.didReachFile = true
         })
         .onDisappear(perform: {
-            self.currentPath = self.currentPath.replacingOccurrences(of: " > \(fileType)", with: "")
+            self.pathComponents.removeLast()
             self.didReachFile = false
         })
     }

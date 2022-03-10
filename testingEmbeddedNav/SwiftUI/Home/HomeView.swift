@@ -12,7 +12,7 @@ struct HomeView: View {
     
     @ObservedObject var homeViewModel: HomeViewModel
     
-    @Binding var path: String
+    @Binding var pathComponents: [String]
     @Binding var didReachFile: Bool
     
     @State private var nest = 0
@@ -42,7 +42,7 @@ struct HomeView: View {
             } else {
                 NestedView_SwiftUI(
                     gif: self.homeViewModel.gifs.first,
-                    currentPath: self.$path,
+                    pathComponents: self.$pathComponents,
                     didReachFile: self.$didReachFile
                 )
                 .onReceive(Just(self.nest), perform: { value in

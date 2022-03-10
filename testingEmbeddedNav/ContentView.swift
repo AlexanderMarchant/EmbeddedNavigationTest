@@ -11,9 +11,8 @@ struct ContentView: View {
     
     @ObservedObject var appState = AppState()
     
-    @State var path = ""
+    @State var pathComponents = [String]()
     @State private var currentLocation = "Home"
-    @State private var pathComponents = [String]()
     
     @State var didReachFile = false
     
@@ -63,24 +62,20 @@ struct ContentView: View {
             }
             .background(.blue)
             
-            HomeView(homeViewModel: .init(), path: self.$path, didReachFile: self.$didReachFile)
+            HomeView(
+                homeViewModel: .init(),
+                pathComponents: self.$pathComponents,
+                didReachFile: self.$didReachFile
+            )
             
         }
         .environmentObject(self.appState)
         .id(appState.rootViewId) 
         .padding(.horizontal, 25)
-        .onChange(of: self.path, perform: { newValue in
+        .onChange(of: self.pathComponents, perform: { newValue in
             
             if !newValue.isEmpty {
-                let split = newValue.split(separator: ">")
-                
-                var mutableSplit = split
-                mutableSplit.removeLast()
-                
-                let mutablePath = mutableSplit.map({ String($0) })
-                
-                self.currentLocation = String(split.last ?? "")
-                self.pathComponents = mutablePath
+                self.currentLocation = newValue.last ?? ""
             } else {
                 self.currentLocation = "Home"
                 self.pathComponents = [String]()

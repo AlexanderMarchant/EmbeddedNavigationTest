@@ -26,7 +26,7 @@ struct NestedView_SwiftUI: View {
     @State var nest = 0
     @State private var isActive = false
     
-    @Binding var currentPath: String
+    @Binding var pathComponents: [String]
     @Binding var didReachFile: Bool
     
     var fileExtension: FileExtension? = nil
@@ -95,10 +95,10 @@ struct NestedView_SwiftUI: View {
             
         })
         .onAppear(perform: {
-            self.currentPath = "\(self.currentPath) > \(self.nest)"
+            self.pathComponents.append("\(self.nest)")
         })
         .onDisappear(perform: {
-            self.currentPath = self.currentPath.replacingOccurrences(of: " > \(self.nest)", with: "")
+            self.pathComponents.removeLast()
         })
     }
     
@@ -108,7 +108,7 @@ struct NestedView_SwiftUI: View {
             
             return AnyView(
                 FileView(
-                    currentPath: self.$currentPath,
+                    pathComponents: self.$pathComponents,
                     didReachFile: self.$didReachFile,
                     fileType: ext.rawValue
                 )
@@ -121,7 +121,7 @@ struct NestedView_SwiftUI: View {
                 return AnyView(
                     NestedView_SwiftUI(
                         nest: self.nest + 1,
-                        currentPath: self.$currentPath,
+                        pathComponents: self.$pathComponents,
                         didReachFile: self.$didReachFile,
                         fileExtension: .jpg
                     )
@@ -131,7 +131,7 @@ struct NestedView_SwiftUI: View {
                 return AnyView(
                     NestedView_SwiftUI(
                         nest: self.nest + 1,
-                        currentPath: self.$currentPath,
+                        pathComponents: self.$pathComponents,
                         didReachFile: self.$didReachFile,
                         fileExtension: nil
                     )
