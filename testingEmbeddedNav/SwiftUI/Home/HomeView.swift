@@ -33,6 +33,7 @@ struct HomeView: View {
                     
                     Button(action: {
                         self.showHome = false
+                        self.pathComponents.append("0")
                     }, label: {
                         Text("Tap me to go to nested views")
                     })

@@ -34,10 +34,14 @@ struct ContentView: View {
                     HStack(spacing: 5) {
                         Image(systemName: "house")
                             .onTapGesture {
+                                self.pathComponents = [String]()
                                 appState.rootViewId = UUID()
                             }
                         
-                        ForEach(self.pathComponents, id: \.self) { component in
+                        Text(">")
+                            .font(.subheadline)
+                        
+                        ForEach(self.pathComponents.dropLast(1), id: \.self) { component in
                             Text(component)
                                 .font(.subheadline)
                                 .underline()
