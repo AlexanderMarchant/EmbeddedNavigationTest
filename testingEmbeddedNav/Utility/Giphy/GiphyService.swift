@@ -83,6 +83,29 @@ class GiphyService: GiphyServiceProtocol {
         
     }
     
+    func getRandomGif(completion: @escaping (GifRandomModel?, Error?) -> Void) {
+        
+        let parameters: [String: String] = [
+            "api_key" : Constants.wouldNotNormallyCommitToGit
+        ]
+        
+        self.performRequest(
+            link: Constants.giphyApiRandomLink,
+            parameters: parameters) { (result: Result<ApiResponse<GifRandomModel>>) in
+            
+            switch result {
+            case let .success(response):
+                completion(response.entity, nil)
+            case let .failure(error):
+                
+                // Log this error to somewhere like crashlytics
+                
+                completion(nil, error)
+            }
+                
+        }
+    }
+    
     private func performRequest<T: Decodable>(
         link: String,
         parameters: [String: String],

@@ -30,6 +30,7 @@
 		D4E6325B27DA64C20049BD18 /* GiphyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6325A27DA64C20049BD18 /* GiphyViewModel.swift */; };
 		D4E6325D27DA65130049BD18 /* GiphyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6325C27DA65130049BD18 /* GiphyView.swift */; };
 		D4E6326027DA65950049BD18 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4E6325F27DA65950049BD18 /* SDWebImageSwiftUI */; };
+		D4E6326427DA736F0049BD18 /* GifRandomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6326327DA736F0049BD18 /* GifRandomModel.swift */; };
 		D4F679A127D11A8100F50EF5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F679A027D11A8100F50EF5 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		D4E6325627DA62CA0049BD18 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D4E6325A27DA64C20049BD18 /* GiphyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyViewModel.swift; sourceTree = "<group>"; };
 		D4E6325C27DA65130049BD18 /* GiphyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyView.swift; sourceTree = "<group>"; };
+		D4E6326327DA736F0049BD18 /* GifRandomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifRandomModel.swift; sourceTree = "<group>"; };
 		D4F679A027D11A8100F50EF5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				D4E6324627DA60140049BD18 /* SupportingModels */,
+				D4E6326227DA735A0049BD18 /* GifRandomModel */,
 				D4E6324127DA5FDF0049BD18 /* GifTrendModel */,
 				D4E6324027DA5FD60049BD18 /* GifSearchModel */,
 				D4E6325127DA621D0049BD18 /* Gif.swift */,
@@ -238,6 +241,14 @@
 			path = NestedView;
 			sourceTree = "<group>";
 		};
+		D4E6326227DA735A0049BD18 /* GifRandomModel */ = {
+			isa = PBXGroup;
+			children = (
+				D4E6326327DA736F0049BD18 /* GifRandomModel.swift */,
+			);
+			path = GifRandomModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -317,6 +328,7 @@
 				D4E6325727DA62CA0049BD18 /* HomeViewModel.swift in Sources */,
 				D49E135D27D0D5EE00480AD9 /* FileView.swift in Sources */,
 				D49E135B27D0D1C700480AD9 /* NestedView_SwiftUI.swift in Sources */,
+				D4E6326427DA736F0049BD18 /* GifRandomModel.swift in Sources */,
 				D49E136027D10D7500480AD9 /* AppState.swift in Sources */,
 				D4E6324B27DA60A70049BD18 /* APIReponse.swift in Sources */,
 				D4E6324827DA60290049BD18 /* GifSupportingModels.swift in Sources */,

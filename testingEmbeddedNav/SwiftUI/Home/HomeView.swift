@@ -51,12 +51,32 @@ struct HomeView: View {
     //            NestedView()
             }
         }
-        .onChange(of: self.nest, perform: { newValue in
-            homeViewModel.loadNextGifSet(onLoad: { gif in
-                DispatchQueue.main.async {
-                    self.gif = gif
+        .onChange(of: self.nest, perform: { [nest] newValue in
+            
+            if nest > newValue {
+                
+                if self.homeViewModel.gifs.count > 1 {
+                    let dif = nest - newValue
+                    
+                    for _ in 0..<dif {
+                        self.homeViewModel.gifs.removeLast()
+                    }
                 }
-            })
+                
+                self.gif = self.homeViewModel.gifs.last
+                
+            } else {
+                
+                homeViewModel.loadNextGifSet(onLoad: { gif in
+                    DispatchQueue.main.async {
+                        self.gif = gif
+                    }
+                })
+                
+            }
+            
+            
+            
         })
         .alert(isPresented: $showingErrorAlert) {
             return Alert(

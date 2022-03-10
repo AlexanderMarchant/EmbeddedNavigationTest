@@ -55,9 +55,8 @@ struct NestedView_SwiftUI: View {
                     
                         Button {
                             
-                            self.pathComponents.removeAll()
-                            self.nest = 0
-                            self.pathComponents.append("\(self.nest)")
+                            self.pathComponents.removeLast()
+                            self.nest -= 1
 
                         } label: {
                             Text("Go back to parent nest")

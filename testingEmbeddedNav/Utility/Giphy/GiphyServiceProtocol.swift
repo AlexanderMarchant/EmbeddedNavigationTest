@@ -8,6 +8,7 @@
 enum GiphySearch {
     case bySearchTerm
     case trending
+    case random
 }
 
 protocol GiphyServiceProtocol {
@@ -20,9 +21,10 @@ protocol GiphyServiceProtocol {
         limit: Int,
         completion: @escaping (GifTrendModel?, Error?) -> Void)
     
-    
     func getGifsBySearchTerm(
         search: String,
         limit: Int,
         completion: @escaping (GifSearchModel?, Error?) -> Void)
+    
+    func getRandomGif(completion: @escaping (GifRandomModel?, Error?) -> Void)
 }

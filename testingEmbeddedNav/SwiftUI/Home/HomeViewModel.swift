@@ -27,7 +27,7 @@ public class HomeViewModel: ObservableObject {
         self.giphyService = giphyService
         self.urlSessionService = urlSessionService
         
-        getGifs(by: .trending, searchTerm: nil)
+        getGifs(by: .random, searchTerm: nil)
     }
     
     func resetAlert() {
@@ -55,6 +55,8 @@ public class HomeViewModel: ObservableObject {
             self.getTrendingGifs()
         case .bySearchTerm:
             self.getGifsBySearchTerm(userSearch: searchTerm)
+        case .random:
+            self.getRandomGif()
         }
     }
     
@@ -71,6 +73,8 @@ public class HomeViewModel: ObservableObject {
             self.getGifsBySearchTerm(userSearch: currentSearchTerm!)
         case .trending:
             self.getTrendingGifs(onLoad: onLoad)
+        case .random:
+            self.getRandomGif(onLoad: onLoad)
         }
     }
     
@@ -156,5 +160,41 @@ public class HomeViewModel: ObservableObject {
                 }
             }
         }
+    }
+        
+        private func getRandomGif(onLoad: ((Gif) -> Void)? = nil) {
+            
+            self.currentSearch = .random
+            
+            isLoading(true)
+            
+            self.giphyService.getRandomGif() { [weak self] (gif, error) in
+                
+                self?.isLoading(false)
+                
+                if let gif = gif,
+                   error == nil {
+                    
+                    let randomGif = gif.data.map({ x in
+                        Gif(
+                            gifUrl: x.images!.downsized!.url!,
+                            title: x.title ?? "",
+                            sourceUrl: x.source ?? "",
+                            markedTrending: x.trending_datetime ?? "",
+                            username: x.username ?? "")
+                    })!
+                    
+                    DispatchQueue.main.async {
+                        self?.gifs.append(randomGif)
+                        onLoad?(randomGif)
+                    }
+                    
+                } else {
+                    // Log the error
+                    DispatchQueue.main.async {
+                        self?.showAlert = true
+                    }
+                }
+            }
     }
 }

@@ -11,6 +11,8 @@ struct ContentView: View {
     
     @ObservedObject var appState = AppState()
     
+    let vc = HomeViewModel()
+    
     @State var pathComponents = [String]()
     @State private var currentLocation = "Home"
     
@@ -63,7 +65,7 @@ struct ContentView: View {
             .background(.blue)
             
             HomeView(
-                homeViewModel: .init(),
+                homeViewModel: vc,
                 pathComponents: self.$pathComponents,
                 didReachFile: self.$didReachFile
             )

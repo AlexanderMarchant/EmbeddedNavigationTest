@@ -12,6 +12,7 @@ struct Constants {
     // Giphy APIs
     static let giphyApiTrendingLink = "https://api.giphy.com/v1/gifs/trending"
     static let giphyApiSearchLink = "https://api.giphy.com/v1/gifs/search"
+    static let giphyApiRandomLink = "https://api.giphy.com/v1/gifs/random"
     
     // Other Links
     static let codalatheWebsiteLink = "https://www.getfilecloud.com"
