@@ -12,11 +12,9 @@ struct NestedView: View {
     
     @State var nest = 0
     
-    var navController: UINavigationController = UINavigationController()
-    
     var body: some View {
         
-        let filesView = FilesViewController(navController: self.navController, parent: self)
+        let filesView = FilesViewController(parent: UIHostingController(rootView: self))
         
         return VStack {
 
@@ -45,7 +43,7 @@ struct NestedView: View {
                 
             }
             
-            .background(Color.blue)
+//            .background(Color.blue)
             .navigationBarHidden(true)
         }
     }

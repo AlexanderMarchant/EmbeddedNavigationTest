@@ -10,8 +10,8 @@ import SwiftUI
 
 struct FilesViewController: UIViewControllerRepresentable {
 
-    let navController: UINavigationController
-    let parent: NestedView
+    let navController = UINavigationController()
+    let parent: UIHostingController<NestedView>
 
     func makeUIViewController(context: Context) -> UINavigationController {
         navController.setNavigationBarHidden(true, animated: false)
@@ -37,25 +37,8 @@ struct FilesViewController: UIViewControllerRepresentable {
 
     func showNestedView() {
         
-        // Handle the tap inside of me
-        
-//        if int <= 200 {
-//            // Show this
-//        } else if int > 200 && int <= 400 {
-//            // Show this view
-//        } else if int > 400 && int <= 600 {
-//            // Show this view
-//        } else if int > 600 && int <= 800 {
-//            // Show this view
-//        } else {
-//            // Show this view
-//        }
-        
-        let nestedView = NestedView(nest: Int.random(in: 0...1000))
+        let nestedView = NestedView(nest: self.parent.rootView.nest + 1)
         let view = UIHostingController(rootView: nestedView)
-        
-        let vc = navController.viewControllers.last
-        vc?.view.isHidden = true
         
         navController.pushViewController(view, animated: true)
     }
@@ -64,9 +47,29 @@ struct FilesViewController: UIViewControllerRepresentable {
         
         navController.popViewController(animated: true)
         
-        let vc = navController.viewControllers.last
-        vc?.view.isHidden = false
-        
     }
+    
+    // MARK: - Add SwiftUI View
+    
+    public func removeSwiftUIView() {
+        self.parent.willMove(toParent: nil)
+        self.parent.view.removeFromSuperview()
+        self.parent.removeFromParent()
+    }
+    
+//    public func add<V: View>(swiftUIView: V, parentViewController: UIViewController? = nil) {
+//        guard let contentView = self.view.contentView else {
+//            return
+//        }
+//        removeSwiftUIView()
+//        let hostingController = UIHostingController(rootView: AnyView(swiftUIView))
+//        self.hostingController = hostingController
+//        let parent = parentViewController ?? self.controller
+//        parent?.addChild(hostingController)
+//        hostingController.view.frame = contentView.bounds
+//        hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        contentView.addSubview(hostingController.view)
+//        hostingController.didMove(toParent: parent)
+//    }
 
 }

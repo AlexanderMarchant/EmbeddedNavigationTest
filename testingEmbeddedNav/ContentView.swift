@@ -63,7 +63,7 @@ struct ContentView: View {
             }
             .background(.blue)
             
-            HomeView(path: self.$path, didReachFile: self.$didReachFile)
+            HomeView(homeViewModel: .init(), path: self.$path, didReachFile: self.$didReachFile)
             
         }
         .environmentObject(self.appState)
