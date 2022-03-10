@@ -41,6 +41,7 @@ struct HomeView: View {
                 }
             } else {
                 NestedView_SwiftUI(
+                    gif: self.homeViewModel.gifs.first,
                     currentPath: self.$path,
                     didReachFile: self.$didReachFile
                 )

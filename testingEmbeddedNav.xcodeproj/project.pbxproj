@@ -27,6 +27,9 @@
 		D4E6325227DA621D0049BD18 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6325127DA621D0049BD18 /* Gif.swift */; };
 		D4E6325527DA62570049BD18 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6325427DA62570049BD18 /* Constants.swift */; };
 		D4E6325727DA62CA0049BD18 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6325627DA62CA0049BD18 /* HomeViewModel.swift */; };
+		D4E6325B27DA64C20049BD18 /* GiphyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6325A27DA64C20049BD18 /* GiphyViewModel.swift */; };
+		D4E6325D27DA65130049BD18 /* GiphyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6325C27DA65130049BD18 /* GiphyView.swift */; };
+		D4E6326027DA65950049BD18 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4E6325F27DA65950049BD18 /* SDWebImageSwiftUI */; };
 		D4F679A127D11A8100F50EF5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F679A027D11A8100F50EF5 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,8 @@
 		D4E6325127DA621D0049BD18 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		D4E6325427DA62570049BD18 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4E6325627DA62CA0049BD18 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		D4E6325A27DA64C20049BD18 /* GiphyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyViewModel.swift; sourceTree = "<group>"; };
+		D4E6325C27DA65130049BD18 /* GiphyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyView.swift; sourceTree = "<group>"; };
 		D4F679A027D11A8100F50EF5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4E6326027DA65950049BD18 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +122,7 @@
 		D49E135927D0D1AF00480AD9 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				D4E6325927DA64A60049BD18 /* GiphyView */,
 				D4E6325827DA62FA0049BD18 /* Home */,
 				D49E135A27D0D1C700480AD9 /* NestedView_SwiftUI.swift */,
 				D49E135C27D0D5ED00480AD9 /* FileView.swift */,
@@ -214,6 +221,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		D4E6325927DA64A60049BD18 /* GiphyView */ = {
+			isa = PBXGroup;
+			children = (
+				D4E6325A27DA64C20049BD18 /* GiphyViewModel.swift */,
+				D4E6325C27DA65130049BD18 /* GiphyView.swift */,
+			);
+			path = GiphyView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,6 +246,9 @@
 			dependencies = (
 			);
 			name = testingEmbeddedNav;
+			packageProductDependencies = (
+				D4E6325F27DA65950049BD18 /* SDWebImageSwiftUI */,
+			);
 			productName = testingEmbeddedNav;
 			productReference = D49E130727CFD9D200480AD9 /* testingEmbeddedNav.app */;
 			productType = "com.apple.product-type.application";
@@ -258,6 +277,9 @@
 				Base,
 			);
 			mainGroup = D49E12FE27CFD9D200480AD9;
+			packageReferences = (
+				D4E6325E27DA65950049BD18 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = D49E130827CFD9D200480AD9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -296,9 +318,11 @@
 				D49E131927CFD9FC00480AD9 /* NestedView.swift in Sources */,
 				D4E6325227DA621D0049BD18 /* Gif.swift in Sources */,
 				D4E6324527DA60080049BD18 /* GifTrendModel.swift in Sources */,
+				D4E6325B27DA64C20049BD18 /* GiphyViewModel.swift in Sources */,
 				D4E6325027DA610C0049BD18 /* UrlSessionService.swift in Sources */,
 				D4F679A127D11A8100F50EF5 /* HomeView.swift in Sources */,
 				D49E135727CFF4CD00480AD9 /* FilesViewController.swift in Sources */,
+				D4E6325D27DA65130049BD18 /* GiphyView.swift in Sources */,
 				D4E6324327DA5FED0049BD18 /* GifSearchModel.swift in Sources */,
 				D49E130B27CFD9D200480AD9 /* testingEmbeddedNavApp.swift in Sources */,
 				D4E6323F27DA5FB30049BD18 /* GiphyService.swift in Sources */,
@@ -505,6 +529,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D4E6325E27DA65950049BD18 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D4E6325F27DA65950049BD18 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4E6325E27DA65950049BD18 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D49E12FF27CFD9D200480AD9 /* Project object */;
 }

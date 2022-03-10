@@ -21,6 +21,8 @@ struct NestedView_SwiftUI: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
+    var gif: Gif?
+    
     @State var nest = 0
     @State private var isActive = false
     
@@ -38,6 +40,8 @@ struct NestedView_SwiftUI: View {
                 Spacer()
                 
                 VStack(spacing: 25) {
+                    
+                    GiphyView(giphyRowViewModel: .init(gif: self.gif))
 
                     NavigationLink(destination: getDestination(from: self.fileExtension), isActive: $isActive) {
                         
