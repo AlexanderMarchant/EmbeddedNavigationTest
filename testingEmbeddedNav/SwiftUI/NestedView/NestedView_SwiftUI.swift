@@ -75,17 +75,6 @@ struct NestedView_SwiftUI: View {
             
             
         }
-        .onChange(of: appState.pathClicked, perform: { value in
-            
-            guard let newValue = value else {
-                      return
-                  }
-            
-            if self.nest == newValue {
-                self.isActive = false
-            }
-            
-        })
 //        .onAppear(perform: {
 //            self.pathComponents.append("\(self.nest)")
 //        })

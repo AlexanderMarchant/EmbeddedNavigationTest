@@ -10,6 +10,8 @@ import Combine
 
 struct HomeView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @ObservedObject var homeViewModel: HomeViewModel
     
     @Binding var pathComponents: [String]
@@ -77,6 +79,27 @@ struct HomeView: View {
             }
             
             
+            
+        })
+        .onChange(of: appState.pathClicked, perform: { value in
+            
+            guard let newValue = value else {
+                return
+            }
+            
+            if self.nest > newValue {
+
+                if self.pathComponents.count > 1 {
+                    let dif = nest - newValue
+
+                    for _ in 0..<dif {
+                        self.pathComponents.removeLast()
+                    }
+                }
+
+            }
+            
+            self.nest = newValue
             
         })
         .alert(isPresented: $showingErrorAlert) {

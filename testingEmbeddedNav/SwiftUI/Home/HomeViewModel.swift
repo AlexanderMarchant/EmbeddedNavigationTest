@@ -162,39 +162,39 @@ public class HomeViewModel: ObservableObject {
         }
     }
         
-        private func getRandomGif(onLoad: ((Gif) -> Void)? = nil) {
+    private func getRandomGif(onLoad: ((Gif) -> Void)? = nil) {
+        
+        self.currentSearch = .random
+        
+        isLoading(true)
+        
+        self.giphyService.getRandomGif() { [weak self] (gif, error) in
             
-            self.currentSearch = .random
+            self?.isLoading(false)
             
-            isLoading(true)
-            
-            self.giphyService.getRandomGif() { [weak self] (gif, error) in
+            if let gif = gif,
+               error == nil {
                 
-                self?.isLoading(false)
+                let randomGif = gif.data.map({ x in
+                    Gif(
+                        gifUrl: x.images!.downsized!.url!,
+                        title: x.title ?? "",
+                        sourceUrl: x.source ?? "",
+                        markedTrending: x.trending_datetime ?? "",
+                        username: x.username ?? "")
+                })!
                 
-                if let gif = gif,
-                   error == nil {
-                    
-                    let randomGif = gif.data.map({ x in
-                        Gif(
-                            gifUrl: x.images!.downsized!.url!,
-                            title: x.title ?? "",
-                            sourceUrl: x.source ?? "",
-                            markedTrending: x.trending_datetime ?? "",
-                            username: x.username ?? "")
-                    })!
-                    
-                    DispatchQueue.main.async {
-                        self?.gifs.append(randomGif)
-                        onLoad?(randomGif)
-                    }
-                    
-                } else {
-                    // Log the error
-                    DispatchQueue.main.async {
-                        self?.showAlert = true
-                    }
+                DispatchQueue.main.async {
+                    self?.gifs.append(randomGif)
+                    onLoad?(randomGif)
+                }
+                
+            } else {
+                // Log the error
+                DispatchQueue.main.async {
+                    self?.showAlert = true
                 }
             }
+        }
     }
 }
